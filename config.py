@@ -1,5 +1,6 @@
 import os
 from dataclasses import dataclass
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,7 +36,8 @@ def load_config() -> Config:
             if x:
                 admin_ids.add(int(x))
 
-    db_path = os.getenv("DB_PATH", "bot.db").strip() or "bot.db"
+    db_path_raw = os.getenv("DB_PATH", "data/bot.db").strip() or "data/bot.db"
+    db_path = str((Path(__file__).resolve().parent / db_path_raw).resolve()) if not Path(db_path_raw).is_absolute() else db_path_raw
     tz = os.getenv("TZ", "Europe/Moscow").strip() or "Europe/Moscow"
 
     repeat_notify = _as_bool(os.getenv("REPEAT_NOTIFY", "1"), default=True)
