@@ -1,0 +1,12 @@
+# secrets
+.env
+.env.*
+*.env
+
+# sqlite
+*.db
+*.sqlite
+*.sqlite3
+
+# persistent runtime data
+data/
