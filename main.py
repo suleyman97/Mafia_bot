@@ -491,7 +491,7 @@ async def main():
     dp = Dispatcher()
     dp.include_router(router)
     dp.workflow_data.update({"service": service, "bot": bot, "admin_ids": cfg.admin_ids, "notify_on_create": cfg.notify_on_create, "announce_autotrack": cfg.announce_autotrack})
-    log.info("Bot started. Admin IDs: %s", sorted(cfg.admin_ids))
+    log.info("Bot started. Admin IDs: %s | DB_PATH: %s", sorted(cfg.admin_ids), cfg.db_path)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
