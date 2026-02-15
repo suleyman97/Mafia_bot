@@ -36,7 +36,9 @@ def load_config() -> Config:
             if x:
                 admin_ids.add(int(x))
 
-    db_path_raw = os.getenv("DB_PATH", "data/bot.db").strip() or "data/bot.db"
+    db_path_raw = os.getenv("DB_PATH", "bot.db").strip() or "bot.db"
+    if db_path_raw == "bot.db":
+        db_path_raw = "data/bot.db"
     db_path = str((Path(__file__).resolve().parent / db_path_raw).resolve()) if not Path(db_path_raw).is_absolute() else db_path_raw
     tz = os.getenv("TZ", "Europe/Moscow").strip() or "Europe/Moscow"
 
