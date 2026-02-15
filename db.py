@@ -1,4 +1,5 @@
 import aiosqlite
+from pathlib import Path
 from typing import Iterable, Optional, Sequence, Any
 
 SCHEMA_SQL = """
@@ -61,6 +62,7 @@ CREATE TABLE IF NOT EXISTS notify_log (
 class Database:
     def __init__(self, path: str):
         self.path = path
+        Path(self.path).parent.mkdir(parents=True, exist_ok=True)
 
     # IMPORTANT: do NOT await connect() before "async with".
     # aiosqlite starts its worker thread when awaited/entered;
